@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-s24/proj-courses-s24-4pm-1
 owner: ucsb-cs156-s24
 repo_name: proj-courses-s24-4pm-1
-pull_requests: []
+pull_requests: [{"author":{"id":"U_kgDOBmDgZA","is_bot":false,"login":"Frank404NotFound","name":"Frank Zhong"},"headRefName":"fz-removeCoursePage","number":22,"title":"fz-removeCoursesUI","url":"https://github.com/ucsb-cs156-s24/proj-courses-s24-4pm-1/pull/22"}]
