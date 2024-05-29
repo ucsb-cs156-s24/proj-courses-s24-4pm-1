@@ -137,11 +137,7 @@ const AdminJobsPage = () => {
     },
     {
       name: "Update Grade Info",
-      form: (
-        <UploadGradesJobForm
-          callback={submitUploadGradesJob}
-        />
-      ),
+      form: <UploadGradesJobForm callback={submitUploadGradesJob} />,
     },
   ];
 
