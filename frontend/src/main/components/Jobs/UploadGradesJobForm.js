@@ -1,14 +1,9 @@
-// function UploadGradesJobForm() {
-//   return <p>In progress! (The form for this job has not yet been created)</p>;
-// }
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
-// import { useForm } from "react-hook-form";
 
 function UploadGradesJobForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // callback({});
   };
 
   // Stryker disable all : Stryker is testing by changing the padding to 0. But this is simply a visual optimization as it makes it look better
