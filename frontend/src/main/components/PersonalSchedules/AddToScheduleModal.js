@@ -5,8 +5,10 @@ import Form from "react-bootstrap/Form";
 import PersonalScheduleSelector from "./PersonalScheduleSelector";
 import { useBackend } from "main/utils/useBackend";
 import { Link } from "react-router-dom";
+import { filterSchedules } from "main/utils/PersonalScheduleUtils";
+import { yyyyqToQyy } from "main/utils/quarterUtilities";
 
-export default function AddToScheduleModal({ section, onAdd }) {
+export default function AddToScheduleModal({ section, quarter, onAdd }) {
   const [showModal, setShowModal] = useState(false);
   const [selectedSchedule, setSelectedSchedule] = useState("");
 
@@ -21,6 +23,8 @@ export default function AddToScheduleModal({ section, onAdd }) {
     [],
   );
   // Stryker restore all
+
+  const filteredSchedules = filterSchedules(quarter, schedules);
 
   const handleModalClose = () => {
     setShowModal(false);
@@ -43,10 +47,11 @@ export default function AddToScheduleModal({ section, onAdd }) {
         <Modal.Body>
           <Form>
             {
-              /* istanbul ignore next */ schedules.length > 0 ? (
+              /* istanbul ignore next */ filteredSchedules.length > 0 ? (
                 <Form.Group controlId="scheduleSelect">
                   <Form.Label>Select Schedule</Form.Label>
                   <PersonalScheduleSelector
+                    filteredSchedules={filteredSchedules}
                     schedule={selectedSchedule}
                     setSchedule={setSelectedSchedule}
                     controlId="scheduleSelect"
@@ -54,8 +59,10 @@ export default function AddToScheduleModal({ section, onAdd }) {
                 </Form.Group>
               ) : (
                 <p>
-                  No schedules found.
-                  <Link to="/personalschedules/create">Create a schedule</Link>
+                  There are no personal schedules found for{" "}
+                  {yyyyqToQyy(quarter)}
+                  <br />
+                  <Link to="/personalschedules/create">Create a Schedule</Link>
                 </p>
               )
             }
@@ -65,6 +72,22 @@ export default function AddToScheduleModal({ section, onAdd }) {
           <Button variant="secondary" onClick={handleModalClose}>
             Close
           </Button>
+          {
+            // /* istanbul ignore next */ filteredSchedules.length > 0 ? (
+            //   <Button variant="primary" onClick={handleModalSave}>
+            //     Save Changes
+            //   </Button>
+            // ) : (
+            //   <Button variant="primary">
+            //     <Link
+            //       to="/personalschedules/create"
+            //       style={{ textDecoration: "none", color: "white" }}
+            //     >
+            //       Create a Schedule
+            //     </Link>
+            //   </Button>
+            // )
+          }
           <Button variant="primary" onClick={handleModalSave}>
             Save Changes
           </Button>

@@ -4,8 +4,11 @@ import "@testing-library/jest-dom/extend-expect";
 import { QueryClient, QueryClientProvider } from "react-query";
 import AddToScheduleModal from "main/components/PersonalSchedules/AddToScheduleModal";
 import { BrowserRouter as Router } from "react-router-dom";
+import axios from "axios";
+import AxiosMockAdapter from "axios-mock-adapter";
 
 const queryClient = new QueryClient();
+const quarter = "20242";
 
 describe("AddToScheduleModal", () => {
   let mockOnAdd;
@@ -14,10 +17,14 @@ describe("AddToScheduleModal", () => {
     mockOnAdd = jest.fn();
   });
 
+  const filteredSchedules = [
+    { id: "schedule1", quarter: "20242", name: "Schedule 1" },
+  ];
+
   test("renders without crashing", () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <AddToScheduleModal onAdd={mockOnAdd} />
+        <AddToScheduleModal onAdd={mockOnAdd} quarter={quarter} />
       </QueryClientProvider>,
     );
   });
@@ -26,7 +33,7 @@ describe("AddToScheduleModal", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <Router>
-          <AddToScheduleModal onAdd={mockOnAdd} />
+          <AddToScheduleModal onAdd={mockOnAdd} quarter={quarter} />
         </Router>
       </QueryClientProvider>,
     );
@@ -46,7 +53,7 @@ describe("AddToScheduleModal", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <Router>
-          <AddToScheduleModal onAdd={mockOnAdd} />
+          <AddToScheduleModal quarter={quarter} onAdd={mockOnAdd} />
         </Router>
       </QueryClientProvider>,
     );
@@ -71,33 +78,17 @@ describe("AddToScheduleModal", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <Router>
-          <AddToScheduleModal onAdd={mockOnAdd} />
+          <AddToScheduleModal quarter={quarter} onAdd={mockOnAdd} />
         </Router>
       </QueryClientProvider>,
     );
 
     fireEvent.click(screen.getByText("Add"));
 
-    expect(screen.getByText("No schedules found.")).toBeInTheDocument();
-    expect(screen.getByText("Create a schedule")).toHaveAttribute(
-      "href",
-      "/personalschedules/create",
-    );
-  });
-
-  test("displays correct message when no schedules found initially", () => {
-    render(
-      <QueryClientProvider client={queryClient}>
-        <Router>
-          <AddToScheduleModal onAdd={mockOnAdd} section={null} />
-        </Router>
-      </QueryClientProvider>,
-    );
-
-    fireEvent.click(screen.getByText("Add"));
-
-    expect(screen.getByText("No schedules found.")).toBeInTheDocument();
-    expect(screen.getByText("Create a schedule")).toHaveAttribute(
+    expect(
+      screen.getByText("There are no personal schedules found for S24"),
+    ).toBeInTheDocument();
+    expect(screen.getByText("Create a Schedule")).toHaveAttribute(
       "href",
       "/personalschedules/create",
     );
@@ -107,7 +98,11 @@ describe("AddToScheduleModal", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <Router>
-          <AddToScheduleModal onAdd={mockOnAdd} section={"Stryker was here!"} />
+          <AddToScheduleModal
+            onAdd={mockOnAdd}
+            quarter={quarter}
+            section={"Stryker was here!"}
+          />
         </Router>
       </QueryClientProvider>,
     );
@@ -132,15 +127,21 @@ describe("AddToScheduleModal", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <Router>
-          <AddToScheduleModal onAdd={mockOnAdd} section={null} />
+          <AddToScheduleModal
+            onAdd={mockOnAdd}
+            quarter={quarter}
+            section={null}
+          />
         </Router>
       </QueryClientProvider>,
     );
 
     fireEvent.click(screen.getByText("Add"));
 
-    expect(screen.getByText("No schedules found.")).toBeInTheDocument();
-    expect(screen.getByText("Create a schedule")).toHaveAttribute(
+    expect(
+      screen.getByText("There are no personal schedules found for S24"),
+    ).toBeInTheDocument();
+    expect(screen.getByText("Create a Schedule")).toHaveAttribute(
       "href",
       "/personalschedules/create",
     );

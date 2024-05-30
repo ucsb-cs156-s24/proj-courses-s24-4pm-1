@@ -14,3 +14,7 @@ export function cellToAxiosParamsDelete(cell) {
     },
   };
 }
+
+export function filterSchedules(quarter, schedules) {
+  return schedules.filter((schedule) => schedule.quarter === quarter);
+}

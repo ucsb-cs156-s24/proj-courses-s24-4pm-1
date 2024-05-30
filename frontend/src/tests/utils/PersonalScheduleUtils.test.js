@@ -1,6 +1,7 @@
 import {
   onDeleteSuccess,
   cellToAxiosParamsDelete,
+  filterSchedules,
 } from "main/utils/PersonalScheduleUtils";
 import mockConsole from "jest-mock-console";
 
@@ -46,6 +47,20 @@ describe("PersonalScheduleUtils", () => {
         method: "DELETE",
         params: { id: 17 },
       });
+    });
+  });
+  describe("filterSchedules", () => {
+    test("Correctly filters schedules", () => {
+      // arrange
+      const schedules = [
+        { id: 1, quarter: "20241", name: "Test 1" },
+        { id: 2, quarter: "20242", name: "Test 2" },
+      ];
+
+      // assert
+      expect(filterSchedules("20241", schedules)).toEqual([
+        { id: 1, quarter: "20241", name: "Test 1" },
+      ]);
     });
   });
 });
