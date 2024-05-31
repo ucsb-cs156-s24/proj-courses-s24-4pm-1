@@ -4,8 +4,6 @@ import "@testing-library/jest-dom/extend-expect";
 import { QueryClient, QueryClientProvider } from "react-query";
 import AddToScheduleModal from "main/components/PersonalSchedules/AddToScheduleModal";
 import { BrowserRouter as Router } from "react-router-dom";
-import axios from "axios";
-import AxiosMockAdapter from "axios-mock-adapter";
 
 const queryClient = new QueryClient();
 const quarter = "20242";

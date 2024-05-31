@@ -1,8 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import PersonalScheduleSelector from "main/components/PersonalSchedules/PersonalScheduleSelector";
-import { useBackend } from "main/utils/useBackend";
-import { yyyyqToQyy } from "main/utils/quarterUtilities.js";
 
 jest.mock("main/utils/useBackend");
 jest.mock("main/utils/quarterUtilities.js");
