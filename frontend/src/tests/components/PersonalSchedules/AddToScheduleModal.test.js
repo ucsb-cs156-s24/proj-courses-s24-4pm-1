@@ -15,10 +15,6 @@ describe("AddToScheduleModal", () => {
     mockOnAdd = jest.fn();
   });
 
-  const filteredSchedules = [
-    { id: "schedule1", quarter: "20242", name: "Schedule 1" },
-  ];
-
   test("renders without crashing", () => {
     render(
       <QueryClientProvider client={queryClient}>
