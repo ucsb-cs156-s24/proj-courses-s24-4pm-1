@@ -10,6 +10,7 @@ import { useBackendMutation } from "main/utils/useBackend";
 import UpdateCoursesJobForm from "main/components/Jobs/UpdateCoursesJobForm";
 import UpdateCoursesByQuarterJobForm from "main/components/Jobs/UpdateCoursesByQuarterJobForm";
 import UpdateCoursesByQuarterRangeJobForm from "main/components/Jobs/UpdateCoursesByQuarterRangeJobForm";
+// import UpdateCoursesByQuarterRangeSingleSubjectJobForm from "main/components/Jobs/UpdateCoursesByQuarterRangeSingleSubjectJobForm";
 
 const AdminJobsPage = () => {
   const refreshJobsIntervalMilliseconds = 5000;
@@ -53,6 +54,11 @@ const AdminJobsPage = () => {
     method: "POST",
   });
 
+  // const objectToAxiosParamsUpdateCoursesByQuarterRangeSingleSubjectJob = (data) => ({
+  //   url: `/api/jobs/launch/updateCoursesRangeOfQuartersSingleSubject?subjectArea=${data.subject}&start_quarterYYYYQ=${data.startQuarter}&end_quarterYYYYQ=${data.endQuarter}`,
+  //   method: "POST",
+  // });
+
   // Stryker disable all
   const updateCoursesJobMutation = useBackendMutation(
     objectToAxiosParamsUpdateCoursesJob,
@@ -76,6 +82,12 @@ const AdminJobsPage = () => {
     {},
     ["/api/jobs/all"],
   );
+
+  // const updateCoursesByQuarterRangeSingleSubjectJobMutation = useBackendMutation(
+  //   objectToAxiosParamsUpdateCoursesByQuarterRangeSingleSubjectJob,
+  //   {},
+  //   ["/api/jobs/all"],
+  // );
   // Stryker restore all
 
   const submitUpdateCoursesJob = async (data) => {
@@ -93,6 +105,10 @@ const AdminJobsPage = () => {
   const submitUploadGradesJob = async (data) => {
     uploadGradesJobMutation.mutate(data);
   };
+
+  // const submitUpdateCoursesByQuarterRangeSingleSubjectJob = async (data) => {
+  //   updateCoursesByQuarterRangeSingleSubjectJobMutation.mutate(data);
+  // };
 
   // Stryker disable all
   const {
@@ -139,6 +155,14 @@ const AdminJobsPage = () => {
       name: "Update Grade Info",
       form: <UploadGradesJobForm callback={submitUploadGradesJob} />,
     },
+    // {
+    //   name: "Update Courses Database by quarter range for single subject",
+    //   form: (
+    //     <UpdateCoursesByQuarterRangeSingleSubjectJobForm
+    //       callback={submitUpdateCoursesByQuarterRangeSingleSubjectJob}
+    //     />
+    //   ),
+    // },
   ];
 
   return (
