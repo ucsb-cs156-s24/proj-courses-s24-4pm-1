@@ -10,8 +10,8 @@ Users with a Google Account can also store past, current or future schedules of 
  
 | Type | Link       | 
 |------|------------| 
-| prod | <https://courses.dokku-00.cs.ucsb.edu/> | 
-| qa | <https://courses-qa.dokku-00.cs.ucsb.edu/>  | 
+| prod | <https://courses.dokku-01.cs.ucsb.edu/> | 
+| qa | <https://courses-qa.dokku-01.cs.ucsb.edu/>  | 
 
 
 # W24 Production Deployments
